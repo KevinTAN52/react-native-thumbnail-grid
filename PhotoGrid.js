@@ -28,9 +28,11 @@ class PhotoGrid extends PureComponent {
   }
 
   handlePressImage = (event, { image, index }, secondViewImages) =>
-    this.props.onPressImage(event, image, {
-      isLastImage: index && this.isLastImage(index, secondViewImages),
-    })
+    {
+      this.props.onPressImage(event, { image, index }, {
+        isLastImage: index && this.isLastImage(index, secondViewImages),
+      })
+    }
 
   render () {
     const { imageProps } = this.props
@@ -73,7 +75,7 @@ class PhotoGrid extends PureComponent {
     return source.length ? (
       <View style={[{ flexDirection: direction, width, height }, this.props.styles]}>
         <View style={{ flex: 1, flexDirection: direction === 'row' ? 'column' : 'row' }}>
-          {firstViewImages.map((image, index) => (
+        {firstViewImages.map((image, index) => (
             <TouchableOpacity activeOpacity={0.7} key={index} style={{ flex: 1 }}
               onPress={event => this.handlePressImage(event, { image })}>
               <ImageLoad
